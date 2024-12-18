@@ -48,8 +48,13 @@ jobs:
 
       - name: Merge BOMs
         run: cyclonedx-linux-x64 merge --input-files $(find . -name 'dxbom.json') --input-format json --output-file target/merged-bom.json --output-format json
-    #  - name: Upload merged BOM
-    #    uses: actions/upload-artifact@v3
-    #    with:
-    #      name: merged-bom
-    #      path: target/merged-bom.json
+
+      - name: Upload SBOM to DependencyTrack
+        uses: DependencyTrack/gh-upload-sbom@v3
+        with:
+          serverHostname: ${{ secrets.DEPENDENCYTRACK_SERVERHOSTNAME }}
+          apiKey: ${{ secrets.DEPENDENCYTRACK_APIKEY }}
+          projectName: "dhis2-core"
+          projectVersion: "1.0.0"
+          bomFile: "target/merged-bom.json"
+          autoCreate: true
