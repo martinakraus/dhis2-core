@@ -56,5 +56,5 @@ jobs:
           apikey: ${{ secrets.DEPENDENCYTRACK_APIKEY }}
           projectname: "dhis2-core"
           projectversion: "1.0.0"
-          bomfilename: "target/merged-bom.json"
+          bomfilename: "dhis-2/target/merged-bom.json"
           autocreate: true
