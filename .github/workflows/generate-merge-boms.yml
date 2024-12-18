@@ -20,8 +20,6 @@ concurrency:
 jobs:
   create-boms:
     runs-on: ubuntu-latest
-    env:
-      INSTANCE_DEPENDENCY_TRACK: "https://dt.security.dhis2.org/api/v1/bom"
     defaults:
       run:
         working-directory: dhis-2/
@@ -51,9 +49,10 @@ jobs:
         run: cyclonedx-linux-x64 merge --input-files $(find . -name 'dxbom.json') --input-format json --output-file target/merged-bom.json --output-format json
 
       - name: Upload SBOM to DependencyTrack
+        env:
+          DEPENDENCY_TRACK_API: "https://dt.security.dhis2.org/api/v1/bom"
         run: |
-          curl -X POST "$INSTANCE_DEPENDENCY_TRACK" \
-              --fail-with-body \
+          curl -X POST "https://dt.security.dhis2.org/api/v1/bom" \
               -H 'Content-Type: multipart/form-data' \
               -H "X-Api-Key: ${{ secrets.DEPENDENCYTRACK_APIKEY }}" \
               -F "project=56383704-d5a2-4a35-ad6a-081f80f5d6d3" \  
