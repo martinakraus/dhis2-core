@@ -52,7 +52,7 @@ jobs:
         env:
           DEPENDENCY_TRACK_API: "https://dt.security.dhis2.org/api/v1/bom"
         run: |
-          curl -X POST "https://dt.security.dhis2.org/api/v1/bom" \
+          curl -X POST "$DEPENDENCY_TRACK_API" \
               --fail-with-body \
               -H "Content-Type: multipart/form-data" \
               -H "X-Api-Key: ${{ secrets.DEPENDENCYTRACK_APIKEY }}" \
