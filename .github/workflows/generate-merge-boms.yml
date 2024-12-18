@@ -52,8 +52,8 @@ jobs:
         env:
           DEPENDENCY_TRACK_API: "https://dt.security.dhis2.org/api/v1/bom"
         run: |
-          curl -X POST "https://dt.security.dhis2.org/api/v1/bom" \
-              -H 'Content-Type: multipart/form-data' \
+          curl -X POST https://dt.security.dhis2.org/api/v1/bom \
+              -H "Content-Type: multipart/form-data" \
               -H "X-Api-Key: ${{ secrets.DEPENDENCYTRACK_APIKEY }}" \
               -F "project=56383704-d5a2-4a35-ad6a-081f80f5d6d3" \  
               -F "bom=@target/merged-bom.json"
