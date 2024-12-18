@@ -37,14 +37,14 @@ jobs:
           distribution: temurin
           cache: maven
 
-      - name: Generate BOMs
-        run: mvn cyclonedx:makeBom
-
       - name: Install CycloneDX CLI
         run: |
-          wget https://github.com/CycloneDX/cyclonedx-cli/releases/download/v0.20.0/cyclonedx-cli-v0.20.0-linux-x64.tar.gz
-          tar -xzf cyclonedx-cli-v0.20.0-linux-x64.tar.gz
+          curl -s https://api.github.com/repos/CycloneDX/cyclonedx-cli/releases/latest | grep "browser_download_url.*linux.*" | cut -d '"' -f 4 | wget -i -
+          tar -xzf cyclonedx-cli-*.tar.gz
           sudo mv cyclonedx /usr/local/bin/
+
+      - name: Generate BOMs
+        run: mvn cyclonedx:makeBom
 
       - name: Merge BOMs
         run: cyclonedx merge --input-files $(find . -name 'dxbom.json') --input-format json --output-file target/merged-bom.json --output-format json
