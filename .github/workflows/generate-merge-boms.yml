@@ -52,7 +52,7 @@ jobs:
 
       - name: Upload SBOM to DependencyTrack
         run: |
-          curl -X "POST" "$INSTANCE_DEPENDENCY_TRACK" \
+          curl -X POST "$INSTANCE_DEPENDENCY_TRACK" \
               --fail-with-body \
               -H 'Content-Type: multipart/form-data' \
               -H "X-Api-Key: ${{ secrets.DEPENDENCYTRACK_APIKEY }}" \
