@@ -52,9 +52,9 @@ jobs:
       - name: Upload SBOM to DependencyTrack
         uses: DependencyTrack/gh-upload-sbom@v3
         with:
-          serverHostname: ${{ secrets.DEPENDENCYTRACK_SERVERHOSTNAME }}
-          apiKey: ${{ secrets.DEPENDENCYTRACK_APIKEY }}
-          projectName: "dhis2-core"
-          projectVersion: "1.0.0"
-          bomFile: "target/merged-bom.json"
-          autoCreate: true
+          serverhostname: ${{ secrets.DEPENDENCYTRACK_SERVERHOSTNAME }}
+          apikey: ${{ secrets.DEPENDENCYTRACK_APIKEY }}
+          projectname: "dhis2-core"
+          projectversion: "1.0.0"
+          bomfilename: "target/merged-bom.json"
+          autocreate: true
